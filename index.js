@@ -16,7 +16,8 @@ const { resolvers } = require('./src/resolver')
     resolvers,
     context: {
       prisma,
-    }
+    },
+    introspection: true
   })
 
 server
