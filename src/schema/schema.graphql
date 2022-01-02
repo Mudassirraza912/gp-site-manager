@@ -1,0 +1,99 @@
+scalar Date
+
+enum Status {
+  Seeding
+  Contacted
+  Accepted
+  Declined
+  NoResponse
+}
+
+# schema.graphql
+
+type User {
+    id: ID!
+    email: String!
+    name: String!
+    password: String!
+    Post: [Post]
+    isVerified: Boolean
+}
+
+type Post {
+  id: Int!      
+  category: String!
+  color:    String!  
+  location: String! 
+  foundDate: String!  
+  title:     String
+  description: String   
+  user:      User   
+  userId:    Int!                          
+}
+
+type Token {
+  id:      Int  
+  userId:  Int
+  token:   String 
+  createdAt:  Date
+}
+
+type Sites {
+  id:          Int    
+  dr:         Int
+  da:         Int
+  domain:      String
+  traffic:     Int
+  vendorPrice: Int
+  clientPrice: Int
+  contact:     String
+  email:       String
+  Category:    String
+  status:     Status 
+}
+
+
+
+type Query {
+  getAllUsers: [User]
+  getAllPosts: [Post]
+  getAllSites: [Sites]
+  loginUser(email: String, password: String): User!
+}
+
+type Mutation {
+    addUser(email: String!, name: String, password: String): User
+    AddSite(
+      dr:         Int!
+      da:         Int!
+      domain:      String!
+      traffic:     Int!
+      vendorPrice: Int!
+      clientPrice: Int!
+      contact:     String
+      email:       String
+      Category:    String!
+    ): Sites
+    updateSite(
+      id:           Int!    
+      dr:           Int
+      da:           Int
+      domain:       String
+      traffic:      Int
+      vendorPrice:  Int
+      clientPrice:  Int
+      contact:      String
+      email:        String
+      Category:     String
+      status:       Status 
+    ): Sites
+    deleteSite(id: Int!): [Sites]
+    # changePassword(id: Int!, currentPassword: String!, newPassword: String!): User
+    # deleteUser(id: Int!): [User]
+    # addPost(category: String!, color: String!, location: String!, foundDate: String!, title: String!, description: String!, userId: Int!): Post
+    # verifyOtp(token: String!, email: String!): User
+    # resendOtp(email: String!): User
+}
+
+
+
